@@ -179,7 +179,6 @@ ALTER TABLE ONLY public.teams ALTER COLUMN id SET DEFAULT nextval('public.teams_
 --
 
 INSERT INTO public.guesses VALUES (1, 'Claudio', 1, 'FNATIC');
-INSERT INTO public.guesses VALUES (2, 'Claudio', 2, 'FURIA');
 INSERT INTO public.guesses VALUES (3, 'Claudio', 3, 'C9');
 INSERT INTO public.guesses VALUES (4, 'Claudio', 4, 'HEROIC');
 INSERT INTO public.guesses VALUES (5, 'Roberto', 1, 'OUTSIDERS');
@@ -212,11 +211,12 @@ INSERT INTO public.maps VALUES (7, 'ANCIENT');
 --
 
 INSERT INTO public.matches VALUES (1, 3, 4, 2, 'Finished', 'OUTSIDERS');
-INSERT INTO public.matches VALUES (2, 1, 2, 3, 'Finished', 'FURIA');
 INSERT INTO public.matches VALUES (3, 5, 6, 1, 'Finished', 'MOUZ');
 INSERT INTO public.matches VALUES (4, 7, 8, 5, 'Finished', 'HEROIC');
-INSERT INTO public.matches VALUES (5, 1, 8, 3, 'Finished', 'FURIA');
-INSERT INTO public.matches VALUES (6, 4, 5, 4, 'Finished', 'MOUZ');
+INSERT INTO public.matches VALUES (2, 1, 2, 3, 'Finished', 'FURIA');
+INSERT INTO public.matches VALUES (5, 1, 8, 3, 'Finished', 'HEROIC');
+INSERT INTO public.matches VALUES (6, 4, 5, 4, 'Finished', 'OUTSIDERS');
+INSERT INTO public.matches VALUES (7, 8, 4, 7, 'On hold', 'To be decided');
 
 
 --
@@ -251,7 +251,7 @@ SELECT pg_catalog.setval('public.maps_id_seq', 7, true);
 -- Name: matches_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.matches_id_seq', 6, true);
+SELECT pg_catalog.setval('public.matches_id_seq', 7, true);
 
 
 --
