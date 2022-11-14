@@ -23,35 +23,35 @@ async function insertNewGame (req:Request, res:Response){
         })
     }
     try {
-        const result = await insertGame(newGame);
-        res.status(200).send(`${result.rowCount} new game inserted`)
+        await insertGame(newGame);
+        res.status(200).send(`New game inserted`)
     } catch (error) {
         res.status(500).send(error.message);
     }
 }
 
 async function updateGame (req:Request, res:Response){
-    const {gameId} = req.params;
+    const gameId = req.params.gameId as string;
     const winner = req.query.winner as string
     
     try {
-        const checkMatch = (await checkGameId(Number(gameId))).rowCount    
+        const checkMatch:number = (await checkGameId(Number(gameId))).rowCount    
         if (checkMatch === 0){
             return res.status(404).send('This match does not exist')
         }
         if (!winner){
             return res.status(400).send('Missing data')
         }
-        const teamId = (await checkTeam(winner)).rows[0]
+        const teamId:{id:number} = (await checkTeam(winner)).rows[0]
         if (!teamId){
             return res.status(400).send('This team does not exist')
         }
-        const checkTeams= (await checkWinner(teamId.id,Number(gameId))).rowCount
+        const checkTeams:number= (await checkWinner(teamId.id,Number(gameId))).rowCount
         if (checkTeams === 0){
             return res.status(400).send('This team is not playing in this match')
         }
-        const result = (await updateGameWinner(winner,Number(gameId))).rowCount
-        res.status(200).send(`${result} winner updated`)
+        await updateGameWinner(winner,Number(gameId))
+        res.status(200).send(`Winner has bee updated`)
     } catch (error) {
         res.status(500).send(error.message);
     }
